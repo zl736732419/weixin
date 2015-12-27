@@ -3,6 +3,8 @@ package com.zheng.weixin.kit;
 import java.io.File;
 import java.io.FileFilter;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -100,6 +102,32 @@ public class BasicSysKit {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	/**
+	 * 将字符串str进行sha1加密操作
+	 *
+	 * @author zhenglian
+	 * @data 2015年12月27日 下午4:35:21
+	 * @param str
+	 * @return
+	 */
+	public static String sha1(String str) {
+		StringBuilder builder = new StringBuilder();
+		try {
+			MessageDigest md = MessageDigest.getInstance("sha1");
+			md.update(str.getBytes());
+			byte[] bytes = md.digest();
+			String s = null;
+			for(byte b : bytes) {
+				s = String.format("%02x", b);
+				builder.append(s);
+			}
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		
+		return builder.toString();
 	}
 	
 }

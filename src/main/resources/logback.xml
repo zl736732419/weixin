@@ -48,6 +48,10 @@
 		<appender-ref ref="ASYNC" />
 	</logger>
 
+	<logger name="org.quartz" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="ASYNC" />
+	</logger>
 	<logger name="org.hibernate" additivity="false">
 		<level value="info" />
 		<appender-ref ref="ASYNC" />
@@ -75,11 +79,6 @@
 		additivity="false">
 		<level value="info" />
 		<appender-ref ref='ASYNC' />
-	</logger>
-
-	<logger name="org.apache.shiro" additivity="false">
-		<level value="ERROR" />
-		<appender-ref ref="ASYNC" />
 	</logger>
 	<logger name="com.zheng">
 		<level value="debug" />

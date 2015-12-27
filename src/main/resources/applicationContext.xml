@@ -17,7 +17,7 @@
 	<context:property-placeholder location="classpath:jdbc.properties" />
 	<!-- 开启注解配置 -->
 	<context:annotation-config />
-	<context:component-scan base-package="com.zheng" />
+	<context:component-scan base-package="com.zheng.weixin" />
 
 	<!-- 配置数据库 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
@@ -97,4 +97,28 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
 	</aop:config>
 	
+	<!-- quartz定时器配置 -->
+	<bean id="weixinJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.zheng.weixin.quartz.job.WeixinQuartzJob"></property>
+		<property name="jobDataMap">
+			<map>
+				<entry key="refreshAccessTokenTask" value-ref="refreshAccessTokenTask"></entry>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- 创建一个触发器 -->
+	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="weixinJob"></property>
+		<property name="startDelay" value="0"></property>
+		<!-- 微信accesstoken每7200秒会刷新，所以需要定时获取 -->
+		<property name="repeatInterval" value="6000000"></property>
+	</bean>
+	
+	<!-- 创建任务调度 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<ref bean="simpleTrigger"/>
+		</property>
+	</bean>
 </beans>
