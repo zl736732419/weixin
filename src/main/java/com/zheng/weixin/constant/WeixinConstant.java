@@ -19,11 +19,35 @@ public class WeixinConstant {
 	 * 用户密匙
 	 */
 	public static String APP_SECRET = "c3f3a58e69f4bcd9dc29afc61b769c48";
-	
+
 	/**
 	 * 自定义菜单
 	 */
 	public static String CREATE_MENU = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
-	
+
+	/**
+	 * 文本消息类型
+	 */
+	public static String MSG_TYPE_TEXT = "text";
+	/**
+	 * 图片消息类型
+	 */
+	public static String MSG_TYPE_IMAGE = "image";
+	/**
+	 * 语音消息类型
+	 */
+	public static String MSG_TYPE_VOICE = "voice";
+	/**
+	 * 视频消息类型
+	 */
+	public static String MSG_TYPE_VIDEO = "video";
+	/**
+	 * 小视频消息类型
+	 */
+	public static String MSG_TYPE_SHORTVIDEO = "shortvideo";
+	/**
+	 * 地理位置消息类型
+	 */
+	public static String MSG_TYPE_LOCATION = "location";
 
 }

@@ -49,7 +49,7 @@
 	</logger>
 
 	<logger name="org.quartz" additivity="false">
-		<level value="debug" />
+		<level value="info" />
 		<appender-ref ref="ASYNC" />
 	</logger>
 	<logger name="org.hibernate" additivity="false">

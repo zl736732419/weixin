@@ -1,6 +1,7 @@
 package com.zheng.weixin.web;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zheng.weixin.ctx.WeixinContext;
+import com.zheng.weixin.kit.MessageKit;
 import com.zheng.weixin.service.IWeixinService;
 
 /**
@@ -50,11 +52,17 @@ public class WeixinController extends BaseController {
 	 * 接收所有微信推送消息
 	 *
 	 * @author zhenglian
+	 * @throws IOException 
 	 * @data 2015年12月29日 下午9:27:05
 	 */
 	@RequestMapping(value="/wget", method=RequestMethod.POST)
-	public void wget() {
-		
+	public void wget() throws IOException {
+		Map<String, Object> map = MessageKit.req2Map(request);
+		System.out.println(map);
+		String respMsg = MessageKit.createRespMsg(map);
+		response.setContentType("application/xml;charset=utf-8");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(respMsg);
 	}
 	
 	@RequestMapping("/accessToken")
