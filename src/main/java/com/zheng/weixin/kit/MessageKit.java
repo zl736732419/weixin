@@ -225,5 +225,18 @@ public class MessageKit {
 			}
 		}
 	}
+	
+	/**
+	 * 将url中accessToken赋值
+	 *
+	 * @author zhenglian
+	 * @data 2016年1月3日 下午9:11:50
+	 * @param url
+	 * @return
+	 */
+	public static String replaceUrlAccessToken(String url) {
+		url = url.replaceAll("ACCESS_TOKEN", WeixinContext.getAccessToken());
+		return url;
+	}
 
 }

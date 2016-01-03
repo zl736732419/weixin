@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.zheng.weixin.constant.WeixinConstant;
 import com.zheng.weixin.ctx.WeixinContext;
+import com.zheng.weixin.domain.WGroup;
 import com.zheng.weixin.domain.WeixinMenu;
 import com.zheng.weixin.enums.MenuType;
 import com.zheng.weixin.kit.JsonKit;
@@ -122,6 +123,32 @@ public class MenuServiceTest extends BaseServiceTest {
 		map.put("xml", "<person>123</person");
 		String xml = MessageKit.map2Xml(map);
 		System.out.println(xml);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testJson() {
+		Map<String, List<WGroup>> map = new HashMap<>();
+		List<WGroup> list = new ArrayList<>();
+		WGroup group = new WGroup();
+		group.setId(1);
+		group.setName("测试组");
+		group.setCount(10);
+		list.add(group);
+		map.put("groups", list);
+		String json = JsonKit.obj2Json(map);
+		System.out.println(json);
+		
+		Map<String, List<Map<String, Object>>> data = JsonKit.json2Obj(json, Map.class);
+		System.out.println(data);
+	}
+	
+	@Test
+	public void testObj2JsonWithNull() {
+		WGroup group = new WGroup();
+		group.setId(1);
+		String result = JsonKit.obj2Json(group);
+		System.out.println(result);
 	}
 	
 }
