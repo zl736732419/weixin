@@ -26,6 +26,21 @@ public class WeixinConstant {
 	public static String CREATE_MENU = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
 
 	/**
+	 * 上传临时素材
+	 */
+	public static String UPLOAD_MEDIA = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&type=TYPE";
+	
+	/**
+	 * 下载临时素材
+	 */
+	public static String DOWNLOAD_MEDIA = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID";
+	
+	/**
+	 * 发送模版消息
+	 */
+	public static String SEND_TEMPLATE_MSG = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN";
+	
+	/**
 	 * 文本消息类型
 	 */
 	public static String MSG_TYPE_TEXT = "text";

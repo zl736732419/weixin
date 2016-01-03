@@ -1,5 +1,6 @@
 package com.zheng.weixin.menu;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,6 +23,7 @@ import com.zheng.weixin.ctx.WeixinContext;
 import com.zheng.weixin.domain.WeixinMenu;
 import com.zheng.weixin.enums.MenuType;
 import com.zheng.weixin.kit.JsonKit;
+import com.zheng.weixin.kit.MessageKit;
 import com.zheng.weixin.quartz.task.RefreshAccessTokenTask;
 import com.zheng.weixin.test.BaseServiceTest;
 
@@ -29,13 +32,17 @@ public class MenuServiceTest extends BaseServiceTest {
 	@Autowired
 	private RefreshAccessTokenTask refreshTokenTask;
 	
-	@Test
-	public void testMenu() throws Exception {
-		String json = createMenuJson();
+	@Before
+	public void initAccessToken() {
 		if(StringUtils.isBlank(WeixinContext.getAccessToken())) {
 			System.out.println("accessToken is Null !!!!!!!!!!!!!!!");
 			refreshTokenTask.refreshAccessToken();
 		}
+	}
+	
+	@Test
+	public void testMenu() throws Exception {
+		String json = createMenuJson();
 		String url = WeixinConstant.CREATE_MENU.replaceAll("ACCESS_TOKEN", WeixinContext.getAccessToken());
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost post = new HttpPost(url);
@@ -107,6 +114,14 @@ public class MenuServiceTest extends BaseServiceTest {
 		String json = JsonKit.obj2Json(map);
 		
 		return json;
+	}
+	
+	@Test
+	public void testMap2Xml() throws IOException {
+		Map<String, Object> map = new HashMap<>();
+		map.put("xml", "<person>123</person");
+		String xml = MessageKit.map2Xml(map);
+		System.out.println(xml);
 	}
 	
 }
