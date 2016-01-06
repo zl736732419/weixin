@@ -29,9 +29,6 @@
 		<filter-name>openSessionInViewFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
- 	<listener>
-		<listener-class>com.zheng.weixin.listener.SpringManager</listener-class>
-	</listener>
 	<listener>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
