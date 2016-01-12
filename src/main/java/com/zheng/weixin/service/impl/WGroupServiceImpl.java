@@ -39,15 +39,16 @@ public class WGroupServiceImpl implements IWGroupService {
 		List<WGroup> groups = new ArrayList<>();
 		for(Map<String, Object> m : list) {
 			WGroup group = new WGroup();
-			group.setId((Integer)m.get("id"));
+			group.setId(((Double)m.get("id")).intValue());
 			group.setName((String)m.get("name"));
-			group.setCount((Integer)m.get("count"));
+			group.setCount(((Double)m.get("count")).intValue());
 			groups.add(group);
 		}
 		
 		return groups;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public WGroup findUserWGroup(String openId) {
 		List<WGroup> groups = findAllWGroups();
